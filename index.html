@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple planner for campus tasks and events.">
+  <title>Campus Life Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top">
+        <div class="wrap top-inner">
+            <a class="brand" href="#dashboard" aria-label="Campus Life Planner">Campus <span>Plan</span></a>
+            <nav aria-label="Main navigation">
+                <a href="#dashboard">Dashboard</a><a href="#records">My Planner</a><a href="#settings">Settings</a><a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+    <main id="main" class="wrap">
+        <section class="hero" aria-labelledby="welcome">
+            <div><p class="eyebrow">YOUR CAMPUS, ORGANIZED</p><h1 id="welcome">Make room for what matters</h1>
+            <p>Keep assignments, events and study sessions in one calm, simple place.</p></div>
+            <a class="button" href="#planner-form">+ Add a plan</a>
+        </section>
+
+        <section id="dashboard" aria-labelledby="dash-title">
+            <div class="section-head"><div><p class="eyebrow">OVERVIEW</p><h2 id="dash-title">Your dashboard</h2></div><p id="today"></p></div>
+            <div class="stats">
+                <article class="stat">
+                    <span class="stat-label">Total plans</span><strong id="total">0</strong><span class="muted">Saved activities</span>
+                </article>
+                <article class="stat"><span class="stat-label">Study time</span><strong><span id="minutes">0</span> <small>min</small></strong><span class="muted">Across all plans</span></article>
+                <article class="stat"><span class="stat-label">Top tag</span><strong id="top-tag">-</strong><span class="muted">Most used category</span></article>
+                <article class="stat"><span class="stat-label">Last 7 days</span><strong id="week-total">0</strong><span class="muted">Plans Created</span></article>
+            </div>
+            
+            <article class="panel chart-panel">
+                <div class="section-head">
+                    <div>
+                        <h3>Weekly activity</h3>
+                        <p class="muted">
+                            Plans created over the last seven days
+                        </p>
+                    </div>
+                </div>
+
+                <div id="chart" class="chart" role="img" aria-label="Weekly activity chart">
+
+                </div>
+            </article>
+        </section>
+
+        <section id="records" class="planner-grid" aria-labelledby="records-title">
+            <div class="records-column">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">STAY ON TRACK</p>
+                        <h2 id="records-title">Your planner</h2>
+                    </div>
+
+                    <span id="record-count" class="pill">0 plans</span>
+                </div>
+
+                <div class="toolbar">
+                    <label class="search-label" for="search">
+                        Regex search
+                        <span class="muted">(e.g. @tag:Study)</span>
+                    </label>
+
+                    <input id="search" type="search" placeholder="Search title, tag or time" autocomplete="off">
+                    
+                    <div class="toolbar-row">
+                        <label for="sort">Sort by</label>
+
+                        <select id="sort">
+                            <option value="date">Due date (soonest)</option>
+                            <option value="title">Title (A-Z)</option>
+                            <option value="title-desc">Title (Z-A)</option>
+                            <option value="duration">Duration (low-high)</option>
+                            <option value="duration-desc">Duration (high-low)</option>
+                        </select>
+
+                        <label class="check">
+                            <input type="checkbox" id="case">
+                            Match case
+                        </label>
+                    </div>
+
+                    <p id="search-error" class="error" role="status" aria-live="polite"></p>
+                </div>
+
+                <div id="record-list" class="record-list" aria-live="polite" aria-busy="false"></div>
+
+                <p id="empty" class="empty" hidden>
+                    No plans match yet. Add your first plan or change your search
+                </p>
+            </div>
+
+            <aside class="panel form-panel" id="planner-form-panel" aria-labelledby="form-title">
+
+            <p class="eyebrow">MAKE IT HAPPEN</p>
+            <h2 id="form-title">Add a plan</h2>
+
+            <form id="plan-form" novalidate>
+                <input type="hidden" id="edit-id">
+
+                <div class="field">
+                    <label for="title">Title</label>
+
+                    <input id="title" name="title" required maxlength="90" placeholder="e.g Finish biology report">
+
+                    <small id="title-error" class="error"></small>
+                </div>
+
+                <div class="field">
+                    <label for="dueDate">Due date</label>
+
+                    <input id="dueDate" name="dueDate" type="date" required>
+
+                    <small id="date-error" class="error"></small>
+                </div>
+
+                <div class="field">
+                    <label for="duration">
+                        Duration <span class="muted">(minutes)</span>
+                    </label>
+
+                    <input id="duration" name="duration" inputmode="decimal" required placeholder="e.g 45">
+
+                    <small id="duration-error" class="error"></small>
+                </div>
+
+                <div class="field">
+                    <label for="tag">Tag</label>
+
+                    <input id="tag" name="tag" required placeholder="Study, Social, Wellness">
+
+                    <small id="tag-error" class="error"></small>
+                </div>
+
+                <div class="field">
+                    <label for="details">
+                        Notes <span class="muted">(optional)</span>
+                    </label>
+
+                    <textarea id="details" rows="2" maxlength="240" placeholder="Room, materials or a reminder"></textarea>
+
+                    <small class="muted">
+                        No leading/ trailing spaces or repeated words
+                    </small>
+                </div>
+
+                <div class="button-row">
+                    <button class="button" type="submit" id="save-button">
+                        Save plan
+                    </button>
+
+                    <button class="button secondary" type="button" id="cancel-edit" hidden>
+                        Cancel edit
+                    </button>
+                </div>
+
+                <p id="form-status" role="status" aria-live="polite" class="status"></p>
+            </form>
+            </aside>
+        </section>
+
+        <section id="settings" class="panel settings" aria-labelledby="settings-title">
+            <p class="eyebrow">MAKE IT YOURS</p>
+            <h2 id="settings-title">Settings &amp; data</h2>
+
+            <div class="settings-grid">
+                <div>
+                    <h3>Time target</h3>
+
+                    <p class="muted">
+                        Set a maximum planned duration in minutes.
+                    </p>
+                    
+                    <label for="cap">
+                        Weekly time target (minutes)
+                    </label>
+
+                    <input id="cap" type="number" min="0" step="1" value="600">
+
+                    <p id="cap-message" role="status" aria-live="polite" class="status"></p>
+
+                    <label for="unit">Convert duration</label>
+
+                    <select id="unit">
+                        <option value="minutes">Show minutes</option>
+                        <option value="hours">Show hours</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h3>Backup your plans</h3>
+
+                    <p class="muted">
+                        Export a JSON backup or import a previously exported file.
+                    </p>
+
+                    <div class="button-row">
+                        <button id="export" class="button secondary" type="button">
+                            Export JSON
+                        </button>
+
+                        <label class="button secondary file-button" for="import-file">
+                            Import JSON
+                        </label>
+
+                        <input id="import-file" type="file" accept=".json,application/json" hidden>
+                    </div>
+
+                    <p id="data-status" role="status" aria-live="polite" class="status"></p>
+
+                    <button id="reset" class="text-button" type="button">
+                        Restore sample data
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about" aria-labelledby="about-title">
+            <div>
+                <p class="eyebrow">ABOUT THIS PROJECT</p>
+                <h2 id="about-title">Plan with intention</h2>
+
+                <p>
+                    CampusPlan helps students manage deadlines,
+                    study sessions and campus events without the
+                    clutter. Your plans stay in this browser unless
+                    you export them
+                </p>
+            </div>
+
+            <div>
+                <h3>Contact</h3>
+                <p>Arnold Ishimwe</p>
+
+                <p>
+                    <a href="https://github.com/arnold-i">Github profile</a>
+                    .
+                    <a href="mailto:a.ishimwe10@alustudent.com">a.ishimwe10@alustudent.com</a>
+                </p>
+
+                <p class="muted">
+                    Replace these links with your own contact details before submitting.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            Built with semantic HTML, responsive css and vanilla JavaScript.
+            <span>CampusPlan 2026</span>
+        </div>
+    </footer>
+</body>
+</html>
