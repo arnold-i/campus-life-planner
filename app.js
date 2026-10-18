@@ -2,12 +2,18 @@ import { validatePlan, validRecord } from "./validators.js";
 import { loadRecords, saveRecords } from "./storage.js";
 
 const $ = (selector) => document.querySelector(selector);
-const form = $("plan-form");
+const form = $("#plan-form");
 const fields = {
-    title: $("title"), dueDate: $("#dueDate"),
+    title: $("#title"), dueDate: $("#dueDate"),
     duration: $("#duration"), tag: $("#tag"), details: $("#details")
 }; 
-const errorIds = { title: "#title-error", dueDate: "#date-error", duration: "#duration-error", tag: "#tag-error"};
+const errorIds = {
+    title: "#title-error",
+    date: "#date-error",
+    dueDate: "#date-error",
+    duration: "#duration-error",
+    tag: "#tag-error"
+};
 const sample = [
     ["Finish biology report", 3, "Study", "2026-10-16"],
     ["Meet project team", 45, "Social", "2026-10-15"],
@@ -76,7 +82,7 @@ function marked(value, regex) {
     }
 
     try {
-        return text.replace(regex, (match) => `<marks>${match}</mark>`);
+        return text.replace(regex, (match) => `<mark>${match}</mark>`);
     } catch {
         return text;
     }
@@ -158,7 +164,7 @@ function renderRecords() {
 
     container.setAttribute("aria-busy", "true");
 
-    container.innerHTMl = list.map((record) => `
+    container.innerHTML = list.map((record) => `
         <article class = "record" data-id="${escapeHTML(record.id)}">
         <div>
             <div class = "record-top">
@@ -228,7 +234,7 @@ function renderStats(){
 
     const chart = $("#chart");
 
-    chart.innerHTMl = days.map((d) => {
+    chart.innerHTML = days.map((d) => {
         const date = d.toISOString().slice(0,10);
 
         const count = records.filter(
@@ -529,4 +535,3 @@ $("#reset").addEventListener("click", () => {
 });
 
 render();
-
