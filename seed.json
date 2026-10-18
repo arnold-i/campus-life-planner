@@ -1,0 +1,102 @@
+[
+  {
+    "id": "seed_0001",
+    "title": "Finish biology report",
+    "duration": 35,
+    "tag": "Study",
+    "dueDate": "2026-10-16",
+    "details": "Review the rubric",
+    "createdAt": "2026-10-14T10:00:00.000Z",
+    "updatedAt": "2026-10-14T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0002",
+    "title": "Meet project team",
+    "duration": 45,
+    "tag": "Social",
+    "dueDate": "2026-10-15",
+    "details": "Room 204",
+    "createdAt": "2026-10-13T10:00:00.000Z",
+    "updatedAt": "2026-10-13T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0003",
+    "title": "Library reading",
+    "duration": 60,
+    "tag": "Study",
+    "dueDate": "2026-10-17",
+    "details": "Chapter 4",
+    "createdAt": "2026-10-12T10:00:00.000Z",
+    "updatedAt": "2026-10-12T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0004",
+    "title": "Morning run",
+    "duration": 30,
+    "tag": "Wellness",
+    "dueDate": "2026-10-18",
+    "details": "Campus track",
+    "createdAt": "2026-10-11T10:00:00.000Z",
+    "updatedAt": "2026-10-11T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0005",
+    "title": "Submit UX wireframes",
+    "duration": 90,
+    "tag": "Study",
+    "dueDate": "2026-10-19",
+    "details": "Export PDF",
+    "createdAt": "2026-10-10T10:00:00.000Z",
+    "updatedAt": "2026-10-10T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0006",
+    "title": "Campus club meeting",
+    "duration": 50,
+    "tag": "Social",
+    "dueDate": "2026-10-20",
+    "details": "Student centre",
+    "createdAt": "2026-10-09T10:00:00.000Z",
+    "updatedAt": "2026-10-09T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0007",
+    "title": "Review lecture notes",
+    "duration": 40,
+    "tag": "Study",
+    "dueDate": "2026-10-21",
+    "details": "Study study repeated-word test",
+    "createdAt": "2026-10-08T10:00:00.000Z",
+    "updatedAt": "2026-10-08T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0008",
+    "title": "Book dentist appointment",
+    "duration": 10,
+    "tag": "Wellness",
+    "dueDate": "2026-10-22",
+    "details": "Call in the morning",
+    "createdAt": "2026-10-14T10:00:00.000Z",
+    "updatedAt": "2026-10-14T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0009",
+    "title": "Volunteer orientation",
+    "duration": 75,
+    "tag": "Community",
+    "dueDate": "2026-10-23",
+    "details": "Bring student ID",
+    "createdAt": "2026-10-13T10:00:00.000Z",
+    "updatedAt": "2026-10-13T10:00:00.000Z"
+  },
+  {
+    "id": "seed_0010",
+    "title": "Plan weekend groceries",
+    "duration": 25,
+    "tag": "Personal",
+    "dueDate": "2026-10-24",
+    "details": "Milk and fruit",
+    "createdAt": "2026-10-12T10:00:00.000Z",
+    "updatedAt": "2026-10-12T10:00:00.000Z"
+  }
+]

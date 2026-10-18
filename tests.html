@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CampusPlan Tests</title><link rel="stylesheet" href="style.css"><script type="module">
+import {patterns,validatePlan,validRecord} from "./validators.js";
+const results=[];
+function test(name,fn){try{if(fn())results.push("PASS — "+name);else results.push("FAIL — "+name);}catch(e){results.push("FAIL — "+name+": "+e.message);}}
+test("accepts a normal title",()=>patterns.title.test("Read chapter 4"));
+test("rejects outer spaces",()=>!patterns.title.test(" read "));
+test("accepts integer duration",()=>patterns.duration.test("45"));
+test("accepts decimal duration",()=>patterns.duration.test("45.5"));
+test("rejects negative duration",()=>!patterns.duration.test("-4"));
+test("accepts valid ISO date",()=>patterns.date.test("2026-10-14"));
+test("rejects invalid month",()=>!patterns.date.test("2026-13-14"));
+test("accepts a tag",()=>patterns.tag.test("Campus Life"));
+test("detects repeated words (advanced back-reference)",()=>patterns.duplicateWords.test("study study"));
+test("validation catches invalid tag",()=>!!validatePlan({title:"Read",duration:"20",dueDate:"2026-10-14",tag:"Tag!"}).tag);
+document.querySelector("#results").innerHTML=results.map(s=>`<li>${s}</li>`).join("");
+document.querySelector("#summary").textContent=`${results.filter(s=>s.startsWith("PASS")).length}/${results.length} tests passed`;
+</script></head><body><main class="wrap"><section class="hero"><div><p class="eyebrow">QUALITY CHECK</p><h1>CampusPlan tests</h1><p>Small checks for the validation rules.</p></div><a class="button" href="index.html">Back to app</a></section><section class="panel"><h2 id="summary">Running tests…</h2><ul id="results"></ul></section></main></body></html>
